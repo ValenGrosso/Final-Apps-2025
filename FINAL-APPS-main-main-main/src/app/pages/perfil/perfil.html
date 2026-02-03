@@ -1,0 +1,124 @@
+<div class="container-configuracion">
+  
+  @if (cargando) {
+    <div class="loading-state">
+      <p class="loading">⏳ Cargando panel de administración...</p>
+    </div>
+  } 
+  @else if (error) {
+    <div class="error-state">
+      <p class="error">❌ {{ error }}</p>
+      <a routerLink="/home">Volver al inicio</a>
+    </div>
+  } 
+  @else if (user) {
+
+    <section class="card info-user">
+      <div class="header-row">
+        <h2>🏪 Mi Restaurante</h2>
+        <div class="user-actions">
+           <button class="btn-icon" title="Editar datos" routerLink="/profile/edit">✏️</button>
+           <button class="btn-icon danger" title="Eliminar cuenta" (click)="openDeleteConfirm()">🗑️</button>
+        </div>
+      </div>
+
+      <div class="info-grid">
+        <div class="item">
+          <span class="label">Nombre:</span>
+          <span class="value">{{ user.restaurantName }}</span>
+        </div>
+        <div class="item">
+          <span class="label">Dueño:</span>
+          <span class="value">{{ user.firstName }} {{ user.lastName }}</span>
+        </div>
+        <div class="item">
+          <span class="label">Dirección:</span>
+          <span class="value">{{ user.address }}</span>
+        </div>
+        <div class="item">
+          <span class="label">Teléfono:</span>
+          <span class="value">{{ user.phoneNumber }}</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card management-section">
+      <div class="header-row">
+        <h3>📂 Categorías</h3>
+        <button class="btn-primary" [routerLink]="['/categorias/edit', 'nuevo']">
+  + Nueva Categoría
+</button>
+      </div>
+
+      <div class="list-container">
+        @for (cat of categories; track cat.id) {
+          <div class="list-item">
+            <span class="item-name">{{ cat.name }}</span>
+            <div class="item-actions">
+<button class="btn-small" [routerLink]="['/categorias/edit', cat.id]">
+  ✏️
+</button>
+              <button class="btn-small danger" (click)="deleteCategory(cat.id)">🗑️</button>
+            </div>
+          </div>
+        } @empty {
+          <p class="empty-msg">No hay categorías creadas.</p> 
+        }
+      </div>
+    </section>
+
+    <section class="card management-section">
+      <div class="header-row">
+        <h3>🍔 Mis Productos</h3>
+        <button class="btn-primary" [routerLink]="['/products/edit', 'nuevo']">
+          + Nuevo Producto
+        </button>
+      </div>
+
+      <div class="list-container product-list">
+        @for (prod of products; track prod.id) {
+          <div class="list-item">
+            <div class="prod-info">
+              <span class="item-name">{{ prod.name }}</span>
+              <span class="item-price">{{ prod.price | currency }}</span>
+            </div>
+            
+            <div class="item-actions">
+              <button class="btn-small" [routerLink]="['/products/edit', prod.id]">
+    ✏️ Editar
+  </button>
+              <button class="btn-small danger" (click)="deleteProduct(prod.id)">🗑️</button>
+            </div>
+          </div>
+        } @empty {
+          <p class="empty-msg">Aún no tienes productos en el menú.</p>
+        }
+      </div>
+    </section>
+    
+    <div class="footer-actions">
+      <a routerLink="/" class="back-link">← Volver al Home</a>
+    </div>
+
+    @if (showDeleteConfirm) {
+      <div class="modal-overlay">
+        <div class="modal-content">
+          <h3>⚠️ Zona de Peligro</h3>
+          <p>¿Estás seguro de que quieres eliminar tu cuenta y todo tu restaurante? Esta acción no se puede deshacer.</p>
+          <div class="modal-actions">
+            <button type="button" class="btn-secondary" (click)="closeDeleteConfirm()" [disabled]="isDeleting">
+              Cancelar
+            </button>
+            <button type="button" class="btn-danger" (click)="deleteUser()" [disabled]="isDeleting">
+              {{ isDeleting ? 'Eliminando...' : 'Sí, Eliminar Todo' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+
+  } @else {
+    <p class="error">No se pudo cargar la información.</p>
+  }
+</div>
+

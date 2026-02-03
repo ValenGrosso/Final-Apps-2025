@@ -1,0 +1,87 @@
+.contenedor-restaurant.container {
+    background-color: #0047ab; /* fondo azul */
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    box-sizing: border-box;
+  }
+  
+  
+  .contenedor-restaurant.container .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem; /* espacio entre tarjetas */
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+
+  .contenedor-restaurant .col-md-4 {
+    padding: 0;
+  }
+  
+  /* Tarjetas blancas con sombra */
+  .card {
+    background: white;  /* !!! Blanqueamos las tarjetas */
+    border-radius: 12px;
+    margin: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    height: 220px;                 /* igual altura para uniformidad */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  /* Texto importante */
+  .card h4.card-title {
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: #003d99;
+  }
+  
+  .card p.card-text {
+    margin: 0.15rem 0;
+    font-size: 0.9rem;
+    color: #222;
+  
+    strong {
+      font-weight: 600;
+      color: #0047ab;
+    }
+  }
+  
+  /* Botón estilizado */
+  .card button.btn {
+    margin-top: auto;
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 2px solid #0047ab;
+    background: transparent;
+    color: #0047ab;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .card button.btn:hover {
+    background-color: #0047ab;
+    color: white;
+  }
+
+  .back-link {
+    display: inline-block; /* CLAVE */
+    color: white;
+    font-weight: 600;
+    text-decoration: underline;
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-left: 30px;
+    margin-top: 20px; /* ahora sí funciona */
+  }
+
+  .back-link:hover {
+    opacity: 0.85;
+  }

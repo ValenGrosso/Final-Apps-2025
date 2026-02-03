@@ -1,0 +1,80 @@
+<div class="register-container">
+  @if (isEditing) {
+    <h1>✏️ Editar Perfil</h1>
+  } @else {
+    <h1>Registrarse</h1>
+  }
+
+  <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+
+    <div class="form-group">
+      <label for="restaurantName">Nombre del restaurante</label>
+      <input id="restaurantName" name="restaurantName" type="text" required
+             [(ngModel)]="userData.restaurantName">
+    </div>
+
+    <div class="form-group">
+      <label for="firstName">Nombre del Dueño</label>
+      <input id="firstName" name="firstName" type="text" required
+             [(ngModel)]="userData.firstName">
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Apellido</label>
+      <input id="lastName" name="lastName" type="text" required
+             [(ngModel)]="userData.lastName">
+    </div>
+
+    <div class="form-group">
+      <label for="address">Dirección</label>
+      <input id="address" name="address" type="text" required
+             [(ngModel)]="userData.address">
+    </div>
+
+    <div class="form-group">
+      <label for="phoneNumber">Teléfono</label>
+      <input id="phoneNumber" name="phoneNumber" type="text" required
+             [(ngModel)]="userData.phoneNumber">
+    </div>
+
+    <hr>
+    <p class="note">
+      {{ isEditing ? 'Ingresa tu contraseña actual (o una nueva) para guardar cambios:' : 'Crea una contraseña:' }}
+    </p>
+
+    <div class="form-group">
+      <label for="password">Contraseña</label>
+      <input id="password" name="password" type="password" required minlength="4"
+             [(ngModel)]="userData.password">
+    </div>
+
+    <div class="form-group">
+      <label for="password2">Repetir Contraseña</label>
+      <input id="password2" name="password2" type="password" required
+             [(ngModel)]="userData.password2"
+             #password2="ngModel">
+
+      @if ((password2.dirty || password2.touched) && userData.password && userData.password2 && userData.password !== userData.password2) {
+        <p class="error">Las contraseñas no coinciden.</p>
+      }
+    </div>
+
+    @if (errorRegister) {
+      <p class="error">Ocurrió un error. Verifica los datos.</p>
+    }
+
+    <button type="submit"
+      [disabled]="registerForm.invalid || isLoading || (userData.password && userData.password2 && userData.password !== userData.password2)">
+      @if(isLoading){ <app-spinner></app-spinner> }
+      {{ isEditing ? 'Guardar Cambios' : 'Registrarse' }}
+    </button>
+
+    @if(!isEditing){
+      <p>¿Ya tenés cuenta? <a routerLink="/Login">Iniciar sesión</a></p>
+    } @else {
+      <a routerLink="/configuracion" class="cancel-link">Cancelar</a>
+    }
+  </form>
+
+  <a routerLink="/home">Home</a>
+</div>

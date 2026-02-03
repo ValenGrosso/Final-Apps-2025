@@ -1,0 +1,95 @@
+<div class="form-container">
+  
+  <header>
+    @if(isEditing){
+      <h2>✏️ Editar Producto</h2>
+    } @else {
+      <h2>➕ Nuevo Producto</h2>
+    }
+  </header>
+
+  <form (ngSubmit)="handleFormSubmission(newProductForm)" #newProductForm="ngForm">
+    
+    <div class="form-group">
+    <label for="name">Nombre del plato *</label>  
+    <input id="name" name="name" type="text" required minlength="2" 
+           [ngModel]="productData.name" placeholder="Ej: Hamburguesa">
+  </div>
+
+  <div class="form-group">
+    <label for="description">Descripción</label>  
+    <textarea id="description" name="description" rows="3" 
+              [ngModel]="productData.description"></textarea>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <label for="price">Precio ($) *</label>  
+      <input id="price" name="price" type="number" required min="0" 
+             [ngModel]="productData.price">
+    </div>
+
+    <div class="form-group">
+      <label for="categoryId">Categoría *</label>  
+      <select id="categoryId" name="categoryId" required 
+              [ngModel]="productData.categoryId">
+        <option value="" disabled selected>Selecciona una...</option>
+        @for (cat of categories; track cat.id) {
+          <option [value]="cat.id">{{ cat.name }}</option>
+        }
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <label for="labels">Etiquetas</label>  
+      <input id="labels" name="labels" type="text" 
+             [ngModel]="productData.labels">
+    </div>
+    
+    <div class="form-group">
+      <label for="discount">Descuento (%)</label>  
+      <input id="discount" name="discount" type="number" min="0" max="100" 
+             [ngModel]="productData.discount">
+    </div>
+  </div>
+
+  <div class="checkbox-group">
+    <div class="checkbox-item">
+      <input id="hasHappyHour" name="hasHappyHour" type="checkbox" 
+             [ngModel]="productData.hasHappyHour">
+      <label for="hasHappyHour">🍹 Aplica Happy Hour</label>
+    </div>
+
+    <div class="checkbox-item">
+      <input id="featured" name="featured" type="checkbox" 
+             [ngModel]="productData.featured">
+      <label for="featured">⭐ Producto Destacado</label>
+    </div>
+
+    <div class="checkbox-item">
+      <input id="isDestacado" name="isDestacado" type="checkbox" 
+             [ngModel]="productData.isDestacado">
+      <label for="isDestacado">🔥 Destacado Secundario</label>
+    </div>
+  </div>
+  
+    @if (errorEnBack){
+      <p class="global-error">Ocurrió un error al guardar. Verifica tu conexión o intenta nuevamente.</p>
+    }    
+  
+    <div class="actions">
+      <button type="submit" class="btn-save" [disabled]="newProductForm.invalid || isLoading">
+        @if(isLoading) {
+          <app-spinner></app-spinner> Guardando...
+        } @else {
+          {{ isEditing ? 'Guardar Cambios' : 'Crear Producto' }}
+        }
+      </button>
+      
+      <a routerLink="/Perfil" class="btn-cancel">Cancelar</a>
+    </div>
+      
+  </form>
+</div>

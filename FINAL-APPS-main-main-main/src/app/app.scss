@@ -1,0 +1,258 @@
+app-tabs{
+    margin-top: auto;
+}/* Estilos globales para toda la app (poner en styles.scss) */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    width: 100vw;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #0047ab; /* Fondo azul */
+    color: #222;
+  }
+  
+  /* Contenedor principal para configuración */
+  .container-configuracion {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1.5rem 2rem;
+    background-color: #0047ab;
+    color: #222;
+  }
+  
+  /* Tarjetas blancas */
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.25rem 1.75rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Header con título y botones */
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  
+    h2, h3 {
+      margin: 0;
+      color: #003d99;
+      font-weight: 700;
+    }
+  
+    .user-actions button {
+      background: transparent;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      margin-left: 0.75rem;
+      transition: color 0.3s ease;
+  
+      &.danger {
+        color: #d32f2f;
+      }
+  
+      &:hover {
+        filter: brightness(0.8);
+      }
+    }
+  }
+  
+  /* Info usuario con grid */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+  
+    .item {
+      display: flex;
+      flex-direction: column;
+  
+      .label {
+        font-weight: 700;
+        color: #003d99;
+        margin-bottom: 0.3rem;
+      }
+      .value {
+        font-size: 1rem;
+        color: #222;
+      }
+    }
+  }
+  
+  /* Sección de gestión - listas con scroll */
+  .management-section .list-container {
+    max-height: 350px;
+    overflow-y: auto;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #cce1fb;
+  }
+  
+  /* Items de listas */
+  .list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #e6efff;
+  
+    .item-name {
+      font-weight: 600;
+      color: #0047ab;
+      font-size: 1rem;
+    }
+  
+    .prod-info {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+  
+      .item-price {
+        font-weight: 700;
+        font-size: 1rem;
+        color: #0047ab;
+      }
+    }
+  
+    .item-actions {
+      display: flex;
+      gap: 0.75rem;
+  
+      button {
+        cursor: pointer;
+        border-radius: 14px;
+        padding: 4px 14px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border: 2px solid #0047ab;
+        background: transparent;
+        color: #0047ab;
+        transition: background-color 0.3s, color 0.3s;
+  
+        &.danger {
+          border-color: #d32f2f;
+          color: #d32f2f;
+        }
+  
+        &:hover {
+          background-color: #0047ab;
+          color: white;
+        }
+  
+        &.danger:hover {
+          background-color: #d32f2f;
+          color: white;
+        }
+      }
+    }
+  }
+  
+  /* Mensajes sin contenido */
+  .empty-msg {
+    color: #777;
+    font-style: italic;
+    font-size: 1rem;
+    padding: 1rem 0;
+    text-align: center;
+  }
+  
+  /* Footer */
+  .footer-actions {
+    text-align: center;
+    margin-top: 2rem;
+  
+    .back-link {
+      color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+  
+  /* Modal eliminar cuenta */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 2rem 2.5rem;
+    border-radius: 20px;
+    max-width: 480px;
+    width: 90%;
+    text-align: center;
+  
+    h3 {
+      font-weight: 700;
+      color: #d32f2f;
+      margin-bottom: 1rem;
+    }
+  
+    p {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      color: #222;
+    }
+  
+    .modal-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+  
+      button {
+        padding: 0.8rem 2rem;
+        border-radius: 24px;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+  
+        &.btn-secondary {
+          background: #ccc;
+          color: #222;
+  
+          &:hover:not(:disabled) {
+            background: #bbb;
+          }
+        }
+  
+        &.btn-danger {
+          background: #d32f2f;
+          color: white;
+  
+          &:hover:not(:disabled) {
+            background: #b02828;
+          }
+        }
+  
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+  
+  /* Responsive ajustes */
+  @media (max-width: 700px) {
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .modal-content {
+      padding: 1.5rem 2rem;
+    }
+  }

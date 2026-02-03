@@ -1,0 +1,40 @@
+<div class="form-container">
+
+  <header>
+    @if (isEditing) {
+      <h2>✏️ Editar Categoría</h2>
+    } @else {
+      <h2>📂 Nueva Categoría</h2>
+    }
+  </header>
+
+  <form (ngSubmit)="handleFormSubmission(newCategoryForm)" #newCategoryForm="ngForm">
+
+    <div class="form-group">
+      <label for="name">Nombre de la categoría</label>
+      <input id="name" type="text" name="name" placeholder="Ej: Bebidas, Postres..."
+             ngModel #name="ngModel" required minlength="2">
+
+      @if (name.dirty && name.invalid) {
+        <p class="error-msg">El nombre es obligatorio (min 2 letras).</p>
+      }
+    </div>
+
+    @if (errorBack) {
+      <p class="global-error">No se pudo guardar la categoría. Intente nuevamente.</p>
+    }
+
+    <div class="actions">
+      <button class="btn-save" [disabled]="newCategoryForm.invalid || isLoading">
+        @if (isLoading) {
+          <app-spinner></app-spinner> Guardando...
+        } @else {
+          {{ isEditing ? 'Guardar Cambios' : 'Crear Categoría' }}
+        }
+      </button>
+
+      <a routerLink="/Perfil" class="btn-cancel">Cancelar</a>
+    </div>
+
+  </form>
+</div>

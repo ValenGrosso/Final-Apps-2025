@@ -1,0 +1,92 @@
+/* Contenedor general con fondo azul */
+.page-container {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #0047ab, #005de6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  padding: 20px;
+  margin: 0; /* Asegurar que no haya margin inesperado */
+}
+
+/* Caja blanca alargada y baja sin barra */
+.white-box {
+  background: white;
+  width: 600px;
+  height: 70px;
+  border-radius: 50px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+  display: flex;
+  align-items: center;
+
+}
+
+/* Grupo de botones dentro - alineados en línea */
+.button-group {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0 40px 0 40px;
+}
+
+/* Botones dentro de la caja */
+.button-group button {
+  flex: 1; 
+  height: 48px;
+  border: none;
+  border-radius: 32px;
+  font-weight: 700;
+  font-size: 16px;
+  color: white;
+  background: linear-gradient(135deg, #005de6 0%, #0047ab 100%);
+  box-shadow:
+    0 8px 20px rgba(0, 92, 230, 0.45),
+    inset 0 -4px 10px rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.button-group button:hover {
+  background: linear-gradient(135deg, #0070ff 0%, #003d99 100%);
+  box-shadow:
+    0 15px 30px rgba(0, 113, 255, 0.7),
+    inset 0 -6px 12px rgba(255, 255, 255, 0.4);
+  transform: translateY(-3px);
+}
+
+.button-group button:active {
+  box-shadow:
+    0 5px 12px rgba(0, 92, 230, 0.5),
+    inset 0 3px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(1px);
+}
+
+
+@media (max-width: 640px) {
+  .white-box {
+    width: 90vw;
+    height: auto;
+    padding: 20px;
+  }
+
+  .button-group {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .button-group button {
+    flex: none;
+    width: 100%;
+    height: 48px;
+  }
+}

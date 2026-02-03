@@ -1,0 +1,90 @@
+<div class="menu-container">
+  
+  <!-- @if(isLoading()){
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Cargando menú...</p>
+    </div>
+  }  -->
+  
+  @if(!user()) {
+    <div class="error-state">
+      <p>⚠️ No se encontró la información del restaurante.</p>
+      <button (click)="volver()">Volver</button>
+    </div>
+  } 
+  
+  @else {
+    <header class="restaurant-header">
+      <h1>{{user()?.restaurantName}}</h1>
+      <div class="restaurant-info">
+        <p>📞 {{user()?.phoneNumber}}</p>
+        <p>📍 {{user()?.address}}</p>
+      </div>
+    </header>
+        
+    <h2 class="section-title">Nuestro Menú</h2>
+    
+    <div class="categories-nav">
+      <button (click)="selectCategory(null)"
+              [class.active]="selectedCategoryId() === null">
+        Todas
+      </button>
+
+      @for (category of categories(); track category.id) {
+        <button (click)="selectCategory(category.id)"
+                [class.active]="selectedCategoryId() === category.id">
+          {{ category.name }}
+        </button>
+      }
+    </div>
+
+    <div class="products-list">
+      @for (producto of filteredProducts(); track producto.id) {
+        
+        <article class="product-item" 
+                 [class.featured-border]="producto.featured">
+          
+          <div class="card-content">
+            <div class="badges">
+              @if(producto.featured){ <span class="badge star">⭐ Destacado</span> }
+              @if(producto.discount){ <span class="badge fire">{{producto.discount}}% OFF 🔥</span> }
+              @if(producto.hasHappyHour){ <span class="badge hh">Happy Hour 🍻</span> }
+            </div>
+
+            <h4>{{ producto.name }}</h4>
+            <p class="description">{{ producto.description }}</p>
+            
+            @if (producto.recommendedFor) {
+              <div class="recommendation">
+                <span>🔔 Ideal para: {{ producto.recommendedFor }} personas</span>
+              </div>
+            }
+
+            <div class="price-info">
+              @if (producto.discount > 0 || producto.hasHappyHour) {
+                <span class="old-price">{{producto.price | currency}}</span>
+                <span class="final-price">{{calculateFinalPrice(producto) | currency}}</span>
+              } @else {
+                <span class="regular-price">{{producto.price | currency}}</span>
+              }
+
+              @if (producto.hasHappyHour) {
+                <span class="promo-text">2x1</span> <!-- editar happy hour -->
+              }
+            </div>
+          </div>
+          
+        </article>
+
+      } @empty {
+        <p class="no-products">No hay productos en esta categoría.</p>
+      }
+    </div>
+
+    <div class="actions">
+      <button class="btn-back" (click)="volver()">⬅ Regresar a Restaurantes</button>       
+    </div>
+  }
+
+</div>
