@@ -148,7 +148,9 @@ app-spinner {
 
 @media (max-width: 600px) {
   .form-container {
-    margin: 1rem;
+    width: 90%;          
+    max-width: 360px;    
+    margin: 1.5rem auto; 
     padding: 1.25rem 1rem;
   }
 
