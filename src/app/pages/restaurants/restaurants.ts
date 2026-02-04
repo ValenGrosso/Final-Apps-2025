@@ -27,8 +27,10 @@ export class RestaurantsPage implements OnInit{
       title: " ¿Desea ver el menu?",
       showCancelButton: true,
       showConfirmButton: true,
+      confirmButtonColor: '#0047ab',
+      cancelButtonColor: '#d33',
       confirmButtonText: "Sí, ver menú",
-      cancelButtonText: "Cancelar"
+      cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
         this.router.navigate(['/restaurants-menu', id]);

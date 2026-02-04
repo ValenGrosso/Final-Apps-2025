@@ -17,7 +17,7 @@
         <h2>🏪 Mi Restaurante</h2>
         <div class="user-actions">
           <button class="btn-icon" title="Editar datos" routerLink="/profile/edit">✏️</button>
-          <button class="btn-icon danger" title="Eliminar cuenta" (click)="openDeleteConfirm()">🗑️</button>
+          <button class="btn-icon danger" title="Eliminar cuenta" (click)="confirmDeleteUser()">🗑️</button>
         </div>
       </div>
 
@@ -57,7 +57,7 @@
               <button class="btn-small" [routerLink]="['/categorias/edit', cat.id]">
                 ✏️
               </button>
-              <button class="btn-small danger" (click)="openDeleteCategoryConfirm(cat.id)">🗑️</button>
+              <button class="btn-small danger" (click)="confirmDeleteCategory(cat.id)">🗑️</button>
             </div>
           </div>
         } @empty {
@@ -86,7 +86,7 @@
               <button class="btn-small" [routerLink]="['/products/edit', prod.id]">
                 ✏️
               </button>
-              <button class="btn-small danger" (click)="openDeleteProductConfirm(prod.id)">🗑️</button>
+              <button class="btn-small danger" (click)="confirmDeleteProduct(prod.id)">🗑️</button>
             </div>
           </div>
         } @empty {
@@ -98,39 +98,6 @@
     <div class="footer-actions">
       <a routerLink="/" class="back-link">Home</a>
     </div>
-
-    @if (showDeleteConfirm) {
-      <div class="modal-overlay">
-        <div class="modal-content">
-          <h3>⚠️ Zona de Peligro</h3>
-
-          @if (deleteContext === 'user') {
-            <p>¿Estás seguro de que quieres eliminar tu cuenta y todo tu restaurante? Esta acción no se puede deshacer.</p>
-          } @else if (deleteContext === 'category') {
-            <p>¿Borrar categoría? Esto podría afectar productos asociados.</p>
-          } @else if (deleteContext === 'product') {
-            <p>¿Estás seguro de borrar este producto?</p>
-          }
-
-          <div class="modal-actions">
-            <button
-              type="button"
-              class="btn-secondary"
-              (click)="closeDeleteConfirm()"
-              [disabled]="isDeleting">
-              Cancelar
-            </button>
-            <button
-              type="button"
-              class="btn-danger"
-              (click)="confirmDelete()"
-              [disabled]="isDeleting">
-              {{ isDeleting ? 'Eliminando...' : confirmButtonText }}
-            </button>
-          </div>
-        </div>
-      </div>
-    }
 
   } @else {
     <p class="error">No se pudo cargar la información.</p>

@@ -93,7 +93,6 @@ export class ProductosEdicion implements OnInit {
         price: Number(form.value.price),
         categoryId: Number(form.value.categoryId),
         restaurantId: this.restaurantId,
-        // Por ahora desactivamos el envío de etiquetas para evitar el 400 del backend
         labels: [],
         // labels: form.value.labels ? form.value.labels.split(',').map((l: string) => l.trim()) : [],
         

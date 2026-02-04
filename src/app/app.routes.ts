@@ -6,10 +6,8 @@ import { Register } from './pages/register/register';
 import { ProductosEdicion } from './components/productos-edicion/productos-edicion';
 import { CategoriasEdicion } from './components/categorias-edicion/categorias-edicion';
 import { onlyLoggedUserGuard } from './guards/only-logged-user-guard';
-import { onlyPublicUserGuard } from './guards/only-public-user-guard';
 import { RestaurantsPage } from './pages/restaurants/restaurants';
 import { RestaurantMenu } from './components/restaurant-menu/restaurant-menu';
-import { Configuracion } from './pages/configuration/configuration';
 
 export const routes: Routes = [
     
@@ -32,7 +30,7 @@ export const routes: Routes = [
         canActivate: [onlyLoggedUserGuard] 
     },
     {
-        path: 'categorias/edit/:idCategory', // :idCategory debe coincidir con el input del componente
+        path: 'categorias/edit/:idCategory', 
         component: CategoriasEdicion,
         canActivate: [onlyLoggedUserGuard]
     },
