@@ -73,7 +73,7 @@ export class ProductosEdicion implements OnInit {
       isDestacado: product.isDestacado || false
     };
 
-    // Mantenemos esto por si acaso, pero el HTML usará [ngModel]
+    // Mantenemos esto por las dudas, pero el HTML usará [ngModel]
     setTimeout(() => {
       this.form()?.setValue(this.productData);
     });

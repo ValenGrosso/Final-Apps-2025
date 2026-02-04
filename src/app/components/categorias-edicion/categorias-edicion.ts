@@ -48,6 +48,7 @@ export class CategoriasEdicion implements OnInit {
         this.categoryOriginal = allCategories.find(c => c.id === Number(idParam));
 
         if (this.categoryOriginal) {
+          // Rellena datos del form
           setTimeout(() => {
             this.form()?.setValue({
               name: this.categoryOriginal!.name,
@@ -86,8 +87,7 @@ if (this.isEditing) {
     name: form.value.name,          
   };
 
-  res = await this.categoryService.updateCategory(
-    Number(this.idCategory()),
+  res = await this.categoryService.updateCategory( Number(this.idCategory()),
     updateData
   );
 } else {

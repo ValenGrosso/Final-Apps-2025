@@ -17,6 +17,7 @@ bootstrapApplication(App, {
     // 👇 ACÁ está la clave: agregamos withComponentInputBinding()
     provideRouter(
       routes,
+      // Mapea los datos que tenes en Angular para usarlo en la URL.
       withComponentInputBinding()
     ),
 

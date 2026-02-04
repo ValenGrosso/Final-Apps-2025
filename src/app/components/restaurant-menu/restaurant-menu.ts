@@ -35,8 +35,7 @@ export class RestaurantMenu implements OnInit {
   categories = signal<Categoria[]>([]);
   selectedCategoryId = signal<number | null>(null);
 
-  // LÓGICA COMPUTADA (La forma moderna de filtrar)
-  // Se actualiza automáticamente si cambia 'products' o 'selectedCategoryId'
+  // LÓGICA COMPUTADA, Se actualiza automáticamente si cambia 'products' o 'selectedCategoryId'(La forma moderna de filtrar)
   filteredProducts = computed(() => {
     const selectedId = this.selectedCategoryId();
     const currentProducts = this.products();
@@ -47,16 +46,12 @@ export class RestaurantMenu implements OnInit {
     return currentProducts.filter(p => p.categoryId === selectedId);
   });
   async ngOnInit() {
-  // 1. Obtenemos el ID del Input Signal
+  // Obtenemos el ID del Input Signal
   const id = this.idRestaurant(); 
   console.log(this.idRestaurant)
 
-  if (id) {
-    //this.isLoading.set(true); // Activa el spinner
-    console.log(this.idRestaurant)
-
     try {
-      // --- A. Cargar Datos del Restaurante (Nombre, Dirección) ---
+      // A. Cargar Datos del Restaurante (Nombre, Dirección) 
       // Primero buscamos si ya lo tenemos en memoria
       let restaurantUser = this.usersService.users.find(r => r.id === id);
 
@@ -66,23 +61,21 @@ export class RestaurantMenu implements OnInit {
       }
       this.user.set(restaurantUser);
 
-      // --- B. Cargar Productos (SOLUCIÓN AL ERROR) ---
-      // Usamos 'id' que definimos arriba, no 'restaurantId'
+      // B. Cargar Productos (SOLUCIÓN AL ERROR) 
       const prods = await this.restaurantService.getProductbyrestaurant(id);
       this.products.set(prods);
 
-      // --- C. Cargar Categorías ---
+      // C. Cargar Categorías 
       await this.categoriesService.getCategoriesByRestaurant(id);
       this.categories.set(this.categoriesService.categories());
 
     } catch (error) {
       console.error("Falló la carga del menú:", error);
     } finally {
-      // --- D. Apagar Spinner (SIEMPRE) ---
+      // D. Apagar Spinner (SIEMPRE) 
       this.isLoading.set(false);
       console.log(this.idRestaurant)
     }
-  }
 }
 
   selectCategory(categoryId: number | null) {
